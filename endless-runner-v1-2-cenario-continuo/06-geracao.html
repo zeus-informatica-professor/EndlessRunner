@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Endless Runner — Geração Dinâmica</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>🏃 Endless Runner — v1.2</h1>
+
+      <nav>
+        <a href="01-ceu.html"> 01. Céu </a>
+
+        <a href="02-cenario.html"> 02. Cenário </a>
+
+        <a href="03-ambiente.html"> 03. Ambiente </a>
+
+        <a href="04-personagem.html"> 04. Personagem </a>
+
+        <a href="05-chao.html"> 05. Chão </a>
+
+        <a href="06-geracao.html" class="ativo"> 06. Geração </a>
+
+        <a href="07-movimento.html"> 07. Movimento </a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="introducao">
+        <h2>Etapa 6 — Geração dinâmica</h2>
+
+        <p>
+          Agora os elementos do cenário não serão mais escritos diretamente no
+          HTML. O JavaScript será responsável por criá-los.
+        </p>
+      </section>
+
+      <section class="cena" id="cena">
+        <div class="sol"></div>
+
+        <div class="personagem"></div>
+
+        <div class="hud">
+          <span id="contador"> Elementos: 0 </span>
+
+          <span> Pontos: 0000 </span>
+        </div>
+
+        <div class="faixa"></div>
+
+        <div class="chao"></div>
+      </section>
+
+      <section class="informacao">
+        <p>
+          <span class="destaque"> Observe: </span>
+
+          os elementos aparecem no cenário, mas permanecem parados.
+        </p>
+
+        <p>O movimento será trabalhado na próxima etapa.</p>
+      </section>
+
+      <div class="controles">
+        <button id="btnIniciar">▶ Iniciar geração</button>
+
+        <button id="btnPausar">⏸ Pausar geração</button>
+
+        <button id="btnLimpar">🗑️ Limpar cenário</button>
+      </div>
+    </main>
+
+    <script src="js/geracao.js"></script>
+  </body>
+</html>
