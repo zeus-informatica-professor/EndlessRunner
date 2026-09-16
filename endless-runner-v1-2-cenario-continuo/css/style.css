@@ -1,32 +1,259 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
 
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--green:#00e676;--dark:#101418;--panel:#17202a}
-body{min-height:100vh;font-family:Arial,sans-serif;background:var(--dark);color:white}
-header{background:#111820;padding:16px 5%;border-bottom:1px solid #29333d}
-header h1{margin-bottom:10px}
-nav{display:flex;flex-wrap:wrap;gap:8px}
-nav a{color:white;text-decoration:none;background:#27313a;padding:9px 13px;border-radius:7px}
-nav a:hover,nav a.ativo{background:var(--green);color:#102015}
-main{width:min(1100px,92%);margin:28px auto}
-.introducao{margin-bottom:20px}.introducao p{margin-top:8px;color:#c5ced6}
-.cena{position:relative;height:430px;overflow:hidden;border-radius:14px;background:linear-gradient(#78c7f2 0 68%,#55a630 68% 73%,#8b5a2b 73%);border:4px solid #27313a;box-shadow:0 12px 30px #0008}
-.sol{position:absolute;width:72px;height:72px;right:9%;top:9%;border-radius:50%;background:#ffd166}
-.nuvem{position:absolute;width:120px;height:35px;border-radius:30px;background:#fffd}
-.nuvem:before,.nuvem:after{content:"";position:absolute;border-radius:50%;background:inherit}
-.nuvem:before{width:48px;height:48px;left:18px;bottom:8px}.nuvem:after{width:60px;height:60px;right:18px;bottom:5px}
-.montanha{position:absolute;bottom:27%;width:0;height:0;border-left:150px solid transparent;border-right:150px solid transparent;border-bottom:180px solid #52796f}
-.arvore{position:absolute;bottom:27%;width:22px;height:80px;background:#5a3d2e}
-.arvore:before{content:"";position:absolute;width:85px;height:85px;left:-31px;top:-65px;border-radius:50%;background:#2d6a4f}
-.personagem{position:absolute;left:16%;bottom:27%;width:42px;height:62px;border-radius:18px 18px 10px 10px;background:#1976d2;border:3px solid #0d47a1;z-index:10}
-.personagem:before{content:"";position:absolute;width:34px;height:34px;left:1px;top:-31px;border-radius:50%;background:#ffd7b5;border:3px solid #8d5524}
-.personagem:after{content:"";position:absolute;width:12px;height:10px;left:12px;bottom:-10px;border-radius:50%;background:#111;box-shadow:17px 0 #111}
-.hud{position:absolute;top:18px;left:18px;right:18px;display:flex;justify-content:space-between;z-index:50}
-.hud span{background:#111820cc;padding:8px 12px;border-radius:8px}
-.faixa{position:absolute;bottom:27%;left:0;width:100%;height:8px;background:#d9f99d;z-index:5}
-.chao{position:absolute;left:0;right:0;bottom:0;height:27%;background:repeating-linear-gradient(90deg,#8b5a2b 0 35px,#74471f 35px 42px)}
-.objeto-cenario{position:absolute;z-index:6;bottom:27%}
-.controles{margin-top:15px;display:flex;gap:10px;flex-wrap:wrap}
-.controles button{border:0;border-radius:7px;padding:10px 14px;cursor:pointer;background:var(--green);color:#102015;font-weight:bold}
-.informacao{margin-top:18px;padding:16px;background:var(--panel);border-radius:10px;color:#d8e0e7}
-.destaque{color:var(--green);font-weight:bold}
-@media(max-width:700px){.cena{height:360px}.hud{flex-direction:column;gap:6px}}
+:root {
+    --green: #00e676;
+    --dark: #101418;
+    --panel: #17202a
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: var(--dark);
+    color: white
+}
+
+header {
+    background: #111820;
+    padding: 16px 5%;
+    border-bottom: 1px solid #29333d
+}
+
+header h1 {
+    margin-bottom: 10px
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    background: #27313a;
+    padding: 9px 13px;
+    border-radius: 7px
+}
+
+nav a:hover,
+nav a.ativo {
+    background: var(--green);
+    color: #102015
+}
+
+main {
+    width: min(1100px, 92%);
+    margin: 28px auto
+}
+
+.introducao {
+    margin-bottom: 20px
+}
+
+.introducao p {
+    margin-top: 8px;
+    color: #c5ced6
+}
+
+.cena {
+    position: relative;
+    height: 430px;
+    overflow: hidden;
+    border-radius: 14px;
+    background: linear-gradient(#78c7f2 0 68%, #55a630 68% 73%, #8b5a2b 73%);
+    border: 4px solid #27313a;
+    box-shadow: 0 12px 30px #0008
+}
+
+.sol {
+    position: absolute;
+    width: 72px;
+    height: 72px;
+    right: 9%;
+    top: 9%;
+    border-radius: 50%;
+    background: #ffd166
+}
+
+.nuvem {
+    position: absolute;
+    width: 120px;
+    height: 35px;
+    border-radius: 30px;
+    background: #fffd
+}
+
+.nuvem:before,
+.nuvem:after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: inherit
+}
+
+.nuvem:before {
+    width: 48px;
+    height: 48px;
+    left: 18px;
+    bottom: 8px
+}
+
+.nuvem:after {
+    width: 60px;
+    height: 60px;
+    right: 18px;
+    bottom: 5px
+}
+
+.montanha {
+    position: absolute;
+    bottom: 27%;
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 180px solid #52796f
+}
+
+.arvore {
+    position: absolute;
+    bottom: 27%;
+    width: 22px;
+    height: 80px;
+    background: #5a3d2e
+}
+
+.arvore:before {
+    content: "";
+    position: absolute;
+    width: 85px;
+    height: 85px;
+    left: -31px;
+    top: -65px;
+    border-radius: 50%;
+    background: #2d6a4f
+}
+
+.personagem {
+    position: absolute;
+    left: 16%;
+    bottom: 27%;
+    width: 42px;
+    height: 62px;
+    border-radius: 18px 18px 10px 10px;
+    background: #1976d2;
+    border: 3px solid #0d47a1;
+    z-index: 10
+}
+
+.personagem:before {
+    content: "";
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    left: 1px;
+    top: -31px;
+    border-radius: 50%;
+    background: #ffd7b5;
+    border: 3px solid #8d5524
+}
+
+.personagem:after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 10px;
+    left: 12px;
+    bottom: -10px;
+    border-radius: 50%;
+    background: #111;
+    box-shadow: 17px 0 #111
+}
+
+.hud {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    right: 18px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 50
+}
+
+.hud span {
+    background: #111820cc;
+    padding: 8px 12px;
+    border-radius: 8px
+}
+
+.faixa {
+    position: absolute;
+    bottom: 27%;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: #d9f99d;
+    z-index: 5
+}
+
+.chao {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 27%;
+    background: repeating-linear-gradient(90deg, #8b5a2b 0 35px, #74471f 35px 42px)
+}
+
+.objeto-cenario {
+    position: absolute;
+    z-index: 6;
+    bottom: 27%
+}
+
+.controles {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap
+}
+
+.controles button {
+    border: 0;
+    border-radius: 7px;
+    padding: 10px 14px;
+    cursor: pointer;
+    background: var(--green);
+    color: #102015;
+    font-weight: bold
+}
+
+.informacao {
+    margin-top: 18px;
+    padding: 16px;
+    background: var(--panel);
+    border-radius: 10px;
+    color: #d8e0e7
+}
+
+.destaque {
+    color: var(--green);
+    font-weight: bold
+}
+
+@media(max-width:700px) {
+    .cena {
+        height: 360px
+    }
+
+    .hud {
+        flex-direction: column;
+        gap: 6px
+    }
+}
