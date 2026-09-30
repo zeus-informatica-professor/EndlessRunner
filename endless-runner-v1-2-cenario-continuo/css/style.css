@@ -257,3 +257,51 @@ main {
         gap: 6px
     }
 }
+.mensagem-jogo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(.9);
+    padding: 16px 22px;
+    border-radius: 10px;
+    background: #111820ee;
+    border: 2px solid var(--green);
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease;
+}
+
+.mensagem-jogo.visivel {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.personagem.atingido {
+    filter: grayscale(1);
+    transform: rotate(-12deg);
+}
+
+.obstaculo-atingido {
+    filter: brightness(1.5);
+}
+
+
+.explicacao-pulo {
+    margin-top: 12px;
+}
+
+kbd {
+    display: inline-block;
+    padding: 3px 7px;
+    border: 1px solid #65727d;
+    border-bottom-width: 3px;
+    border-radius: 5px;
+    background: #27313a;
+    color: white;
+    font-family: inherit;
+    font-size: .9em;
+}
