@@ -305,3 +305,58 @@ kbd {
     font-family: inherit;
     font-size: .9em;
 }
+
+
+/* Camada do portal educacional */
+:root {
+    --portal-bg: #0b1117;
+    --portal-card: #151f29;
+    --portal-line: #2b3946;
+    --portal-muted: #aab8c5;
+}
+body.portal-body { background: var(--portal-bg); }
+.portal-header { position: relative; }
+.portal-header .marca { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.portal-header .marca .simbolo { display:grid; place-items:center; width:44px; height:44px; border-radius:12px; background:var(--green); color:#102015; font-size:1.4rem; }
+.portal-header .submarca { color:var(--portal-muted); margin:6px 0 14px; }
+.portal-nav { display:flex; flex-wrap:wrap; gap:8px; }
+.portal-nav a { color:#e8eef3; text-decoration:none; background:#27313a; padding:9px 12px; border-radius:8px; font-size:.94rem; }
+.portal-nav a:hover, .portal-nav a.ativo { background:var(--green); color:#102015; }
+.hero { padding: clamp(24px,5vw,52px); border:1px solid var(--portal-line); border-radius:18px; background: radial-gradient(circle at 90% 0%, #254638 0, transparent 35%), linear-gradient(135deg,#17232d,#101820); }
+.hero .etiqueta { display:inline-block; padding:6px 10px; border:1px solid #397452; border-radius:999px; color:#9bf4bc; font-size:.85rem; margin-bottom:14px; }
+.hero h2 { font-size:clamp(2rem,5vw,3.5rem); line-height:1.05; max-width:800px; }
+.hero p { color:#c5ced6; max-width:720px; line-height:1.7; margin-top:16px; }
+.hero-acoes { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+.link-destaque, .botao-secundario { display:inline-block; border-radius:8px; padding:12px 16px; text-decoration:none; font-weight:bold; }
+.link-destaque { background:var(--green); color:#102015; }
+.botao-secundario { border:1px solid #50606e; color:#fff; }
+.secao-portal { margin-top:32px; }
+.secao-portal h2 { margin-bottom:8px; }
+.secao-portal > p { color:var(--portal-muted); margin-bottom:18px; line-height:1.6; }
+.grade-etapas { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); gap:14px; }
+.cartao-etapa { display:flex; flex-direction:column; gap:10px; min-height:190px; padding:18px; background:var(--portal-card); border:1px solid var(--portal-line); border-radius:14px; }
+.cartao-etapa .numero { color:#8ee7aa; font-size:.82rem; font-weight:bold; text-transform:uppercase; letter-spacing:.07em; }
+.cartao-etapa h3 { font-size:1.08rem; }
+.cartao-etapa p { color:#b9c5cf; line-height:1.5; font-size:.94rem; flex:1; }
+.cartao-etapa a { color:#9bf4bc; font-weight:bold; text-decoration:none; }
+.cartao-etapa a:hover { text-decoration:underline; }
+.bloco-conceito { margin-top:18px; padding:18px; border:1px solid var(--portal-line); border-radius:12px; background:#121b23; line-height:1.65; }
+.bloco-conceito h3 { margin-bottom:8px; }
+.bloco-conceito ul { padding-left:22px; margin-top:8px; }
+.anuncio { min-height:80px; margin:22px 0; padding:14px; border:1px dashed #475866; border-radius:10px; display:grid; place-items:center; color:#8493a0; text-align:center; font-size:.82rem; }
+.anuncio small { display:block; margin-top:5px; }
+.rodape { border-top:1px solid var(--portal-line); margin-top:44px; padding:24px 5%; color:#93a2af; font-size:.9rem; }
+.rodape a { color:#9bf4bc; }
+.progresso-etapas { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+.progresso-etapas span { background:#27313a; border-radius:7px; padding:7px 10px; color:#d8e0e7; font-size:.88rem; }
+.hud { gap:8px; }
+.hud span { white-space:nowrap; }
+#mensagemJogo { text-align:center; max-width:90%; }
+#statusJogo { color:#d8e0e7; margin-top:10px; min-height:1.5em; }
+.controles button:focus-visible, a:focus-visible { outline:3px solid #fff; outline-offset:3px; }
+@media(max-width:700px) {
+    .portal-header .marca { align-items:flex-start; }
+    .hero { padding:24px; }
+    .hud { flex-direction:row; flex-wrap:wrap; }
+    .hud span { font-size:.88rem; }
+}

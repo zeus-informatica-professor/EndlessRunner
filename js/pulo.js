@@ -150,7 +150,7 @@ function reiniciarJogo() {
 
     personagem.classList.remove("atingido");
     mensagemJogo.classList.remove("visivel");
-    
+
     personagem.style.transform = "translateY(0)";
 
     ultimoTempo = 0;

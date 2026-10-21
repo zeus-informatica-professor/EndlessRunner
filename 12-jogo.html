@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jogue o Endless Runner e explore colisão, pulo, pontuação e sistema de vidas com JavaScript.">
+  <title>Etapa 12 — Jogo completo | Fábrica Endless Runner</title>
+  <link rel="stylesheet" href="css/style.css">
+
+   <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9990121839271094"
+     crossorigin="anonymous"></script>
+</head>
+<body class="portal-body">
+<header class="portal-header">
+  <div class="marca"><span class="simbolo">🏃</span><div><h1>Fábrica Endless Runner</h1><p class="submarca">Etapa 12 · Integração das mecânicas</p></div></div>
+  <nav class="portal-nav"><a href="index.html">Início</a>
+<a href="01-ceu.html">01. Céu</a><a href="02-cenario.html">02. Cenário</a>
+<a href="03-ambiente.html">03. Ambiente</a><a href="04-personagem.html">04. Personagem</a>
+<a href="05-chao.html">05. Chão</a><a href="06-geracao.html">06. Geração contínua</a>
+<a href="07-movimento.html">07. Movimento</a><a href="08-personagem.html">08. Personagem no jogo</a>
+<a href="09-colisao.html">09. Colisão</a><a href="10-pulo.html">10. Pulo</a>
+<a href="11-tratamento-erros.html">11. Tratamento de erros</a><a href="12-jogo.html">12. Jogo completo</a></nav>
+</header>
+<main>
+  <aside class="anuncio" aria-label="Espaço reservado para publicidade">Espaço reservado para anúncio<small>O código do AdSense será configurado depois da validação do portal.</small></aside>
+  <section class="introducao">
+    <h2>Etapa 12 — Jogo completo</h2>
+    <p>Integramos as mecânicas estudadas: movimento, pulo, colisão, pontuação, vidas e fim de jogo. Use esta versão para testar e investigar o código.</p>
+  </section>
+  <section class="cena" id="cena" aria-label="Área do jogo Endless Runner">
+    <div class="sol"></div>
+    <div class="nuvem" style="left:12%;top:17%"></div>
+    <div class="nuvem" style="left:52%;top:30%;transform:scale(.8)"></div>
+    <div class="montanha" style="left:8%"></div>
+    <div class="montanha" style="right:7%;transform:scale(.8)"></div>
+    <div class="personagem" id="personagem" aria-label="Personagem do jogo"></div>
+    <div class="mensagem-jogo" id="mensagemJogo" role="status" aria-live="polite">FIM DE JOGO</div>
+    <div class="hud">
+      <span id="hudVidas">❤️❤️❤️ Vidas: 3</span>
+      <span id="hudPontos">⭐ Pontos: 0</span>
+      <span id="hudRecorde">🏆 Recorde: 0</span>
+    </div>
+    <div class="faixa"></div>
+    <div class="chao"></div>
+  </section>
+  <p id="statusJogo" role="status" aria-live="polite">Clique em Iniciar. Pressione Espaço ou ↑ para pular.</p>
+  <div class="controles">
+    <button id="btnIniciar" type="button">▶ Iniciar</button>
+    <button id="btnPausar" type="button">⏸ Pausar</button>
+    <button id="btnReiniciar" type="button">↻ Reiniciar</button>
+  </div>
+  <section class="bloco-conceito">
+    <h3>O que investigar nesta versão?</h3>
+    <ul>
+      <li><strong>Estado:</strong> quais variáveis representam jogo ativo, vidas, pontuação e pulo?</li>
+      <li><strong>Condicionais:</strong> o que acontece quando ocorre uma colisão? E quando as vidas chegam a zero?</li>
+      <li><strong>Arrays e DOM:</strong> como os obstáculos são criados, armazenados e removidos?</li>
+      <li><strong>Eventos:</strong> como os botões e o teclado iniciam, pausam ou reiniciam o jogo?</li>
+      <li><strong>Animação:</strong> por que o loop usa <code>requestAnimationFrame()</code> e a diferença de tempo <code>delta</code>?</li>
+    </ul>
+  </section>
+  <section class="bloco-conceito">
+    <h3>Desafio de análise</h3>
+    <p>Altere uma variável de cada vez e observe o efeito. Teste duração do pulo, altura, velocidade do cenário e intervalo de geração dos obstáculos. Depois, explique qual função é responsável por cada comportamento.</p>
+  </section>
+  <aside class="anuncio" aria-label="Espaço reservado para publicidade">Espaço reservado para anúncio<small>O código do AdSense será configurado depois da validação do portal.</small></aside>
+</main>
+<footer class="rodape">
+  <p><strong>Fábrica Endless Runner</strong> — projeto didático de Programação Web com HTML, CSS e JavaScript.</p>
+  <p>Material educacional. <a href="politica-de-privacidade.html">Política de privacidade</a> · <a href="sobre.html">Sobre o projeto</a></p>
+</footer>
+<script src="js/jogo-completo.js"></script>
+</body>
+</html>
