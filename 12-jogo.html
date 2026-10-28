@@ -7,9 +7,8 @@
   <title>Etapa 12 — Jogo completo | Fábrica Endless Runner</title>
   <link rel="stylesheet" href="css/style.css">
 
-   <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9990121839271094"
-     crossorigin="anonymous"></script>
+  <!-- Google AdSense: anúncios automáticos (exibição condicionada à aprovação do site). -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9990121839271094" crossorigin="anonymous"></script>
 </head>
 <body class="portal-body">
 <header class="portal-header">
@@ -23,10 +22,17 @@
 <a href="11-tratamento-erros.html">11. Tratamento de erros</a><a href="12-jogo.html">12. Jogo completo</a></nav>
 </header>
 <main>
-  <aside class="anuncio" aria-label="Espaço reservado para publicidade">Espaço reservado para anúncio<small>O código do AdSense será configurado depois da validação do portal.</small></aside>
+  <aside class="anuncio" aria-label="Espaço reservado para publicidade">Publicidade<small>Os anúncios automáticos do AdSense dependem da aprovação do site e da configuração da conta.</small></aside>
   <section class="introducao">
     <h2>Etapa 12 — Jogo completo</h2>
     <p>Integramos as mecânicas estudadas: movimento, pulo, colisão, pontuação, vidas e fim de jogo. Use esta versão para testar e investigar o código.</p>
+  </section>
+  <section class="bloco-conceito seletor-jogador" aria-labelledby="tituloJogadorAtivo">
+    <div><h3 id="tituloJogadorAtivo">Quem vai jogar?</h3><p>Escolha um cadastro para aplicar a cor do personagem e registrar a pontuação máxima.</p></div>
+    <label for="seletorJogador">Jogador ativo</label>
+    <select id="seletorJogador" name="jogadorAtivo"></select>
+    <p id="statusJogador" role="status" aria-live="polite"></p>
+    <a class="botao-secundario" href="13-jogadores.html">Gerenciar jogadores</a>
   </section>
   <section class="cena" id="cena" aria-label="Área do jogo Endless Runner">
     <div class="sol"></div>
@@ -64,12 +70,13 @@
     <h3>Desafio de análise</h3>
     <p>Altere uma variável de cada vez e observe o efeito. Teste duração do pulo, altura, velocidade do cenário e intervalo de geração dos obstáculos. Depois, explique qual função é responsável por cada comportamento.</p>
   </section>
-  <aside class="anuncio" aria-label="Espaço reservado para publicidade">Espaço reservado para anúncio<small>O código do AdSense será configurado depois da validação do portal.</small></aside>
+  <aside class="anuncio" aria-label="Espaço reservado para publicidade">Publicidade<small>Os anúncios automáticos do AdSense dependem da aprovação do site e da configuração da conta.</small></aside>
 </main>
 <footer class="rodape">
   <p><strong>Fábrica Endless Runner</strong> — projeto didático de Programação Web com HTML, CSS e JavaScript.</p>
   <p>Material educacional. <a href="politica-de-privacidade.html">Política de privacidade</a> · <a href="sobre.html">Sobre o projeto</a></p>
 </footer>
+<script src="js/jogadores-dados.js"></script>
 <script src="js/jogo-completo.js"></script>
 </body>
 </html>

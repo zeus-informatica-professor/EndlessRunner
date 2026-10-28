@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cadastre jogadores do Endless Runner e gerencie nome, pontuação e cor do personagem.">
+  <title>Etapa 13 — CRUD de jogadores | Fábrica Endless Runner</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google AdSense: anúncios automáticos (exibição condicionada à aprovação do site). -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9990121839271094" crossorigin="anonymous"></script>
+</head>
+<body class="portal-body">
+<header class="portal-header">
+  <div class="marca"><span class="simbolo">🏃</span><div><h1>Fábrica Endless Runner</h1><p class="submarca">Etapa 13 · Cadastro e persistência de dados</p></div></div>
+  <nav class="portal-nav"><a href="index.html">Início</a>
+<a href="01-ceu.html">01. Céu</a><a href="02-cenario.html">02. Cenário</a>
+<a href="03-ambiente.html">03. Ambiente</a><a href="04-personagem.html">04. Personagem</a>
+<a href="05-chao.html">05. Chão</a><a href="06-geracao.html">06. Geração contínua</a>
+<a href="07-movimento.html">07. Movimento</a><a href="08-personagem.html">08. Personagem no jogo</a>
+<a href="09-colisao.html">09. Colisão</a><a href="10-pulo.html">10. Pulo</a>
+<a href="11-tratamento-erros.html">11. Tratamento de erros</a><a href="12-jogo.html">12. Jogo completo</a><a href="13-jogadores.html" class="ativo" aria-current="page">13. Jogadores</a></nav>
+</header>
+<main>
+  <aside class="anuncio" aria-label="Espaço de publicidade"><strong>Publicidade</strong><small>Os anúncios automáticos do AdSense dependem da aprovação do site e da configuração da conta.</small></aside>
+  <section class="introducao">
+    <h2>Etapa 13 — CRUD de jogadores</h2>
+    <p>Vamos preparar os dados que, nas próximas aulas, serão armazenados em um banco PostgreSQL no Supabase. Nesta etapa, a persistência continua no navegador usando <code>localStorage</code>.</p>
+  </section>
+  <section class="bloco-conceito">
+    <h3>O que vamos armazenar?</h3>
+    <p>Cada jogador é representado por um objeto com identificador, nome, pontuação máxima e cor do personagem. O identificador é separado do nome para que possamos localizar e atualizar o registro sem depender de um campo que pode mudar.</p>
+    <p><strong>CRUD:</strong> Create (cadastrar), Read (listar), Update (editar) e Delete (excluir).</p>
+  </section>
+  <section class="crud-layout" aria-labelledby="tituloFormulario">
+    <form id="formJogador" class="crud-form" novalidate>
+      <h3 id="tituloFormulario">Cadastrar jogador</h3>
+      <label for="nomeJogador">Nome</label>
+      <input id="nomeJogador" name="nome" type="text" minlength="2" maxlength="40" autocomplete="off" required placeholder="Ex.: Ana Silva">
+      <label for="pontuacaoJogador">Pontuação máxima</label>
+      <input id="pontuacaoJogador" name="pontuacao" type="number" min="0" max="999999" step="1" value="0" required>
+      <label for="corJogador">Cor do personagem</label>
+      <div class="campo-cor"><input id="corJogador" name="cor" type="color" value="#1976d2" required><output id="valorCor" for="corJogador">#1976d2</output></div>
+      <div class="controles">
+        <button id="btnSalvarJogador" type="submit">Cadastrar jogador</button>
+        <button id="btnCancelarEdicao" type="button" class="botao-neutro" hidden>Cancelar edição</button>
+      </div>
+      <p id="mensagemCrud" class="mensagem-crud" role="status" aria-live="polite"></p>
+    </form>
+    <section class="lista-jogadores" aria-labelledby="tituloLista">
+      <div class="lista-cabecalho"><div><h3 id="tituloLista">Jogadores cadastrados</h3><p>Selecione quem será usado na próxima partida.</p></div><span id="contadorJogadores" class="contador-registros">0 jogadores</span></div>
+      <div class="tabela-responsiva">
+        <table class="tabela-jogadores">
+          <thead><tr><th>Jogador</th><th>Pontuação</th><th>Cor</th><th>Ações</th></tr></thead>
+          <tbody id="listaJogadores"></tbody>
+        </table>
+      </div>
+      <p id="listaVazia" class="lista-vazia" hidden>Nenhum jogador cadastrado. Use o formulário para criar o primeiro.</p>
+      <a class="link-destaque acao-ir-jogo" href="12-jogo.html">Ir para o jogo →</a>
+    </section>
+  </section>
+  <section class="bloco-conceito">
+    <h3>Preparação para PostgreSQL / Supabase</h3>
+    <p>O objeto JavaScript usa os campos <code>id</code>, <code>nome</code>, <code>pontuacao</code>, <code>cor</code>, <code>criadoEm</code> e <code>atualizadoEm</code>. Essa estrutura facilita a próxima etapa: mapear os campos para colunas SQL e substituir as operações locais por requisições a uma API.</p>
+    <p><strong>Importante:</strong> o <code>localStorage</code> pertence a um navegador/dispositivo. Ainda não há sincronização entre computadores e não é um banco de dados compartilhado.</p>
+  </section>
+  <aside class="anuncio" aria-label="Espaço de publicidade"><strong>Publicidade</strong><small>Os anúncios automáticos do AdSense dependem da aprovação do site e da configuração da conta.</small></aside>
+</main>
+<footer class="rodape"><p><strong>Fábrica Endless Runner</strong> — projeto didático de Programação Web com HTML, CSS e JavaScript.</p><p>Material educacional. <a href="politica-de-privacidade.html">Política de privacidade</a> · <a href="sobre.html">Sobre o projeto</a></p></footer>
+<script src="js/jogadores-dados.js"></script>
+<script src="js/jogadores-crud.js"></script>
+</body>
+</html>

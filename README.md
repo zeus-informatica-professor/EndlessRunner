@@ -1,50 +1,59 @@
-# Fábrica Endless Runner — versão 0.2
+# Fábrica Endless Runner — versão 0.4 (CRUD de jogadores)
 
-Portal educacional de Programação Web com uma trilha progressiva de 11 etapas.
+Portal didático de Programação Web com 13 etapas, jogo integrado e CRUD de jogadores.
 
 ## Como executar
 1. Extraia o ZIP.
 2. Abra a pasta `endless-final`.
-3. Abra `index.html` no navegador ou use Live Server no VS Code.
-4. Acesse as etapas pela navegação do portal.
+3. Abra `index.html` no navegador ou, de preferência, use Live Server no VS Code.
+4. Acesse a etapa 13 para cadastrar, editar e excluir jogadores; depois abra a etapa 12 para jogar.
 
-## O que esta versão contém
-- Página inicial do portal com trilha de 11 etapas.
-- Etapas 01 a 10 preservadas a partir da versão mais recente disponível do projeto.
-- Etapa 11 com jogo integrado: movimento dos obstáculos, pulo, colisão, vidas, pontuação, recorde local, fim de jogo e reinício.
-- Espaços reservados para publicidade, sem identificadores fictícios e sem código ativo de AdSense.
-- Páginas iniciais “Sobre” e “Política de privacidade”.
-- Arquivo `ads.txt` de placeholder para completar quando os dados oficiais do AdSense estiverem disponíveis.
+## Novidades da versão 0.4
+- Etapa 13: CRUD de jogadores (Create, Read, Update e Delete).
+- Cada jogador é um objeto com `id`, `nome`, `pontuacao`, `cor`, `criadoEm` e `atualizadoEm`.
+- O cadastro valida nome, pontuação inteira não negativa e cor hexadecimal.
+- A página de jogo permite escolher o jogador ativo.
+- A cor cadastrada é aplicada ao corpo do personagem jogável.
+- A pontuação máxima é persistida no cadastro do jogador quando um novo recorde é alcançado.
+- O armazenamento é feito em `localStorage`; os dados não sincronizam entre dispositivos.
+- A estrutura dos objetos foi preparada para futura migração a uma tabela PostgreSQL no Supabase.
+- O script global do Google AdSense foi incluído em todas as páginas HTML com o ID de editor fornecido pelo professor, permitindo a configuração de anúncios automáticos. Os anúncios só serão exibidos se o site/conta estiverem aprovados e a configuração do AdSense permitir.
 
-## Mecânicas do jogo completo
+## Mecânicas do jogo
 - Pressione `Espaço` ou `↑` para pular.
-- Clique em Iniciar para começar, Pausar para interromper e Reiniciar para começar uma nova partida.
+- Use Iniciar, Pausar e Reiniciar.
 - Cada obstáculo ultrapassado acrescenta 1 ponto.
-- Uma colisão remove um obstáculo e reduz uma vida; o mesmo obstáculo não pode descontar várias vidas.
-- Com zero vidas, o jogo termina.
-- O recorde fica salvo no `localStorage` do navegador com a chave `endlessRunnerRecorde`.
+- Uma colisão remove um obstáculo e reduz uma vida.
+- O recorde exibido é específico do jogador selecionado.
 
-## Organização
-- `index.html`: página inicial.
-- `01-ceu.html` a `11-jogo.html`: sequência didática.
+## Organização relevante
+- `index.html`: página inicial e trilha.
+- `01-ceu.html` a `13-jogadores.html`: etapas didáticas e CRUD.
+- `12-jogo.html`: jogo integrado.
 - `css/style.css`: estilos compartilhados.
-- `js/`: comportamento das etapas.
-- `politica-de-privacidade.html` e `sobre.html`: páginas informativas.
-- `ads.txt`: placeholder para configuração futura.
+- `js/jogadores-dados.js`: operações de leitura e gravação dos objetos no localStorage.
+- `js/jogadores-crud.js`: lógica da interface CRUD.
+- `js/jogo-completo.js`: mecânicas do jogo e associação ao jogador ativo.
+- `politica-de-privacidade.html`: política-modelo que deve ser revisada antes de monetizar/publicar definitivamente.
+
+## Modelo de dados atual
+```js
+{
+  id: "uuid",
+  nome: "Ana Silva",
+  pontuacao: 25,
+  cor: "#1976d2",
+  criadoEm: "2026-10-23T12:00:00.000Z",
+  atualizadoEm: "2026-10-23T12:00:00.000Z"
+}
+```
+
+## Caminho didático para as próximas aulas
+1. Definir a tabela PostgreSQL `jogadores` e seus tipos/constraints.
+2. Criar a tabela no Supabase.
+3. Entender API REST e `fetch()`.
+4. Trocar o armazenamento local por operações remotas, sem colocar chaves secretas no frontend.
+5. Validar erros de rede, respostas HTTP e regras de negócio.
 
 ## Publicidade
-Os blocos atuais são apenas espaços reservados. Antes de publicar:
-1. Confirmar domínio e implantação.
-2. Configurar o AdSense com as credenciais reais fornecidas pela conta.
-3. Inserir o snippet oficial do AdSense no `<head>` conforme as instruções da plataforma.
-4. Substituir `ads.txt` pelo conteúdo oficial.
-5. Revisar a política de privacidade de acordo com os serviços realmente ativados.
-
-Nenhuma credencial, ID de editor ou código de anúncio foi inventado.
-
-
-## Etapas atualizadas
-- Etapa 11: `11-tratamento-erros.html` — `try`, `catch`, `finally` e `throw`.
-- Etapa 12: `12-jogo.html` — versão integrada do jogo Endless Runner.
-
-Os espaços de anúncio e `ads.txt` são placeholders; não há anúncios ativos. Consulte o guia de AdSense fornecido separadamente.
+O script global incluído é o de anúncios automáticos do AdSense. Ele não garante anúncios visíveis enquanto o site estiver em revisão ou não aprovado. Não foram inventados IDs de blocos (`data-ad-slot`).

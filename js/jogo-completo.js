@@ -5,6 +5,8 @@ const hudVidas = document.getElementById("hudVidas");
 const hudPontos = document.getElementById("hudPontos");
 const hudRecorde = document.getElementById("hudRecorde");
 const statusJogo = document.getElementById("statusJogo");
+const seletorJogador = document.getElementById("seletorJogador");
+const statusJogador = document.getElementById("statusJogador");
 
 const btnIniciar = document.getElementById("btnIniciar");
 const btnPausar = document.getElementById("btnPausar");
@@ -24,21 +26,66 @@ let tempoProximoObstaculo = 100;
 let elementos = [];
 let vidas = VIDAS_INICIAIS;
 let pontos = 0;
-let recorde = carregarRecorde();
+let jogadorAtual = JogadoresStore.garantirJogadorInicial();
+let recorde = jogadorAtual.pontuacao;
 let personagemPulando = false;
 let inicioPulo = 0;
 
-atualizarPainel();
+preencherSeletorJogadores();
 
 function carregarRecorde() {
-    const valorSalvo = Number(localStorage.getItem("endlessRunnerRecorde"));
-    return Number.isFinite(valorSalvo) && valorSalvo >= 0 ? valorSalvo : 0;
+    const jogador = JogadoresStore.buscarPorId(JogadoresStore.obterJogadorAtivoId());
+    return jogador ? jogador.pontuacao : 0;
 }
 
 function salvarRecorde() {
-    if (pontos <= recorde) return;
-    recorde = pontos;
-    localStorage.setItem("endlessRunnerRecorde", String(recorde));
+    if (!jogadorAtual || pontos <= recorde) return;
+    const jogadorSalvo = JogadoresStore.salvarMelhorPontuacao(jogadorAtual.id, pontos);
+    if (jogadorSalvo) {
+        jogadorAtual = jogadorSalvo;
+        recorde = jogadorAtual.pontuacao;
+    }
+}
+
+function aplicarJogador(jogador) {
+    jogadorAtual = jogador;
+    recorde = jogador ? jogador.pontuacao : 0;
+    if (jogador) {
+        personagem.style.setProperty("--cor-personagem", jogador.cor);
+        statusJogador.textContent = `Jogando como ${jogador.nome}. Melhor pontuação: ${jogador.pontuacao}.`;
+        hudRecorde.textContent = `🏆 Recorde: ${recorde}`;
+    } else {
+        personagem.style.removeProperty("--cor-personagem");
+        statusJogador.textContent = "Cadastre um jogador para começar.";
+    }
+    btnIniciar.disabled = !jogador;
+    atualizarPainel();
+}
+
+function preencherSeletorJogadores() {
+    const jogadores = JogadoresStore.listar();
+    const ativoId = JogadoresStore.obterJogadorAtivoId();
+    seletorJogador.replaceChildren();
+    jogadores.forEach(function (jogador) {
+        const opcao = document.createElement("option");
+        opcao.value = jogador.id;
+        opcao.textContent = jogador.nome;
+        seletorJogador.appendChild(opcao);
+    });
+    if (jogadores.length === 0) {
+        const opcao = document.createElement("option");
+        opcao.value = "";
+        opcao.textContent = "Nenhum jogador cadastrado";
+        seletorJogador.appendChild(opcao);
+        seletorJogador.disabled = true;
+        aplicarJogador(null);
+        return;
+    }
+    seletorJogador.disabled = false;
+    const selecionado = jogadores.find(function (jogador) { return jogador.id === ativoId; }) || jogadores[0];
+    seletorJogador.value = selecionado.id;
+    JogadoresStore.definirJogadorAtivo(selecionado.id);
+    aplicarJogador(selecionado);
 }
 
 function atualizarPainel() {
@@ -219,12 +266,26 @@ function reiniciarJogo() {
     statusJogo.textContent = "Partida reiniciada. Clique em Iniciar para começar.";
 }
 
+seletorJogador.addEventListener("change", function () {
+    if (jogoAtivo) {
+        seletorJogador.value = jogadorAtual ? jogadorAtual.id : "";
+        statusJogador.textContent = "Pause o jogo antes de trocar de jogador.";
+        return;
+    }
+    const jogador = JogadoresStore.buscarPorId(seletorJogador.value);
+    if (!jogador) return;
+    JogadoresStore.definirJogadorAtivo(jogador.id);
+    aplicarJogador(jogador);
+    reiniciarJogo();
+    statusJogador.textContent = `Jogando como ${jogador.nome}. Melhor pontuação: ${jogador.pontuacao}.`;
+});
+
 btnIniciar.addEventListener("click", iniciarJogo);
 btnPausar.addEventListener("click", pausarJogo);
 btnReiniciar.addEventListener("click", reiniciarJogo);
 
 document.addEventListener("keydown", function(evento) {
-    if (evento.code === "Space" || evento.code === "ArrowUp") {
+    if ((evento.code === "Space" || evento.code === "ArrowUp") && jogadorAtual) {
         evento.preventDefault();
         iniciarPulo();
     }

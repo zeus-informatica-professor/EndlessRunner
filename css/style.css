@@ -360,3 +360,45 @@ body.portal-body { background: var(--portal-bg); }
     .hud { flex-direction:row; flex-wrap:wrap; }
     .hud span { font-size:.88rem; }
 }
+
+
+/* Etapa 13 — CRUD de jogadores */
+.crud-layout { display:grid; grid-template-columns:minmax(260px, .8fr) minmax(0, 1.6fr); gap:18px; margin-top:20px; align-items:start; }
+.crud-form, .lista-jogadores { min-width:0; padding:20px; border:1px solid var(--portal-line); border-radius:14px; background:var(--portal-card); }
+.crud-form h3, .lista-jogadores h3 { margin-bottom:14px; }
+.crud-form label { display:block; margin:14px 0 6px; color:#e8eef3; font-weight:600; }
+.crud-form input:not([type="color"]) { width:100%; border:1px solid #52616e; border-radius:8px; background:#0b1117; color:#f5f7fa; padding:11px 12px; font:inherit; }
+.crud-form input:focus-visible, .seletor-jogador select:focus-visible { outline:3px solid #8ee7aa; outline-offset:2px; }
+.campo-cor { display:flex; align-items:center; gap:12px; }
+.campo-cor input { width:56px; height:42px; padding:3px; border:1px solid #52616e; border-radius:8px; background:#0b1117; cursor:pointer; }
+.campo-cor output { font-family:monospace; color:#d8e0e7; }
+.botao-neutro { background:#344250 !important; color:#f4f7fa !important; }
+.botao-perigo { background:#702d35 !important; color:#fff !important; }
+.mensagem-crud { min-height:1.5em; margin-top:12px; color:#c7d1da; }
+.mensagem-crud[data-tipo="erro"] { color:#ff9c9c; }
+.mensagem-crud[data-tipo="sucesso"] { color:#9bf4bc; }
+.lista-cabecalho { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap; }
+.lista-cabecalho p { color:var(--portal-muted); margin:-6px 0 14px; }
+.contador-registros { border:1px solid var(--portal-line); border-radius:999px; padding:5px 10px; color:#c7d1da; font-size:.85rem; white-space:nowrap; }
+.tabela-responsiva { width:100%; overflow-x:auto; }
+.tabela-jogadores { width:100%; border-collapse:collapse; text-align:left; }
+.tabela-jogadores th, .tabela-jogadores td { padding:12px 9px; border-bottom:1px solid var(--portal-line); vertical-align:middle; }
+.tabela-jogadores th { color:#9bf4bc; font-size:.88rem; }
+.tabela-jogadores td { color:#e1e8ee; }
+.selo-ativo { display:inline-block; margin:5px 0 0 7px; padding:3px 7px; border-radius:999px; background:#214b35; color:#a6f1bf; font-size:.75rem; white-space:nowrap; }
+.amostra-cor { display:inline-block; width:18px; height:18px; border:1px solid #fff8; border-radius:5px; vertical-align:middle; margin-right:7px; }
+.acoes-registro { display:flex; flex-wrap:wrap; gap:5px; }
+.botao-pequeno { border:0; border-radius:6px; padding:7px 9px; background:var(--green); color:#102015; font-weight:700; cursor:pointer; }
+.lista-vazia { padding:20px 0; color:var(--portal-muted); }
+.acao-ir-jogo { margin-top:18px; }
+.seletor-jogador { display:grid; grid-template-columns:minmax(0,1fr) minmax(200px,.7fr); gap:8px 16px; align-items:center; }
+.seletor-jogador h3 { margin-bottom:4px; }
+.seletor-jogador p { color:var(--portal-muted); line-height:1.5; }
+.seletor-jogador label { font-weight:700; }
+.seletor-jogador select { width:100%; padding:10px; border:1px solid #52616e; border-radius:8px; background:#0b1117; color:#fff; font:inherit; }
+.seletor-jogador #statusJogador { grid-column:1 / -1; }
+.seletor-jogador .botao-secundario { justify-self:start; grid-column:1 / -1; }
+.personagem { background:var(--cor-personagem, #1976d2); }
+.personagem { border-color:color-mix(in srgb, var(--cor-personagem, #1976d2), #000 35%); }
+@media(max-width:850px) { .crud-layout { grid-template-columns:1fr; } }
+@media(max-width:600px) { .seletor-jogador { grid-template-columns:1fr; } .seletor-jogador #statusJogador, .seletor-jogador .botao-secundario { grid-column:auto; } .tabela-jogadores th, .tabela-jogadores td { padding:9px 6px; font-size:.9rem; } }
