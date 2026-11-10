@@ -1,4 +1,4 @@
-# Fábrica Endless Runner — versão 0.4 (CRUD de jogadores)
+# Fábrica Endless Runner — versão 0.5 (integração Supabase)
 
 Portal didático de Programação Web com 13 etapas, jogo integrado e CRUD de jogadores.
 
@@ -57,3 +57,26 @@ Portal didático de Programação Web com 13 etapas, jogo integrado e CRUD de jo
 
 ## Publicidade
 O script global incluído é o de anúncios automáticos do AdSense. Ele não garante anúncios visíveis enquanto o site estiver em revisão ou não aprovado. Não foram inventados IDs de blocos (`data-ad-slot`).
+
+
+## Novidade da versão 0.5 — Supabase/PostgreSQL
+- Nova tela `14-supabase.html`, separada do CRUD local da etapa 13.
+- Consulta os registros existentes em `public.jogadores`.
+- Permite cadastrar, editar e excluir jogadores diretamente no PostgreSQL.
+- Utiliza a biblioteca oficial `supabase-js` v2 via CDN.
+- Os campos utilizados são `id`, `nome`, `pontuacao`, `cor`, `criado_em` e `atualizado_em`.
+- Preencha `js/supabase-config.js` com a Project URL e a chave pública (publishable/anon) do seu projeto, ou informe os dados diretamente na tela.
+- A tela remota depende de conexão com a internet, da tabela criada e de políticas/permissões RLS compatíveis.
+- O CRUD local da etapa 13 e o jogo da etapa 12 permanecem inalterados nesta versão.
+- **Limite intencional desta etapa:** a pontuação do jogo ainda não é enviada ao Supabase automaticamente. A tela 14 ensina e valida o CRUD remoto de forma isolada antes da próxima etapa de integração do jogo.
+
+### Configuração
+1. Abra `js/supabase-config.js`.
+2. Substitua `COLE_AQUI_A_PROJECT_URL` pela Project URL do Supabase.
+3. Substitua `COLE_AQUI_A_PUBLISHABLE_OU_ANON_KEY` pela chave pública do projeto.
+4. Não use a chave `service_role`.
+5. Execute com Live Server ou publique em um host HTTPS.
+6. Abra `14-supabase.html` e clique em **Conectar e carregar jogadores**.
+
+### Observação sobre RLS
+A tabela precisa permitir `SELECT`, `INSERT`, `UPDATE` e `DELETE` para o papel usado pela chave pública. Se a consulta retornar erro de permissão, confira as políticas de Row Level Security e os grants no Supabase. Não desative RLS como solução automática.

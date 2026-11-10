@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Integração didática do Endless Runner com Supabase e PostgreSQL.">
+  <title>Etapa 14 — Supabase | Fábrica Endless Runner</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="portal-body">
+<header class="portal-header">
+  <div class="marca"><span class="simbolo">🏃</span><div><h1>Fábrica Endless Runner</h1><p class="submarca">Etapa 14 · Banco de dados com Supabase</p></div></div>
+  <nav class="portal-nav"><a href="index.html">Início</a><a href="12-jogo.html">12. Jogo</a><a href="13-jogadores.html">13. Jogadores (local)</a><a href="14-supabase.html">14. Supabase</a></nav>
+</header>
+<main>
+  <section class="introducao">
+    <h2>Etapa 14 — Jogadores no PostgreSQL</h2>
+    <p>Nesta tela, o CRUD será executado no banco remoto do Supabase. Os registros exibidos vêm da tabela <code>public.jogadores</code>, não do <code>localStorage</code>.</p>
+  </section>
+
+  <section class="bloco-conceito">
+    <h3>1. Configuração da conexão</h3>
+    <p>Informe a URL do projeto e a chave pública (publishable/anon) encontrada em Project Settings → API. A configuração fica neste navegador enquanto a página estiver aberta.</p>
+    <div class="crud-form">
+      <label for="supabaseUrl">Project URL</label>
+      <input id="supabaseUrl" type="url" placeholder="https://seu-projeto.supabase.co" autocomplete="url">
+      <label for="supabaseKey">Publishable key / anon key</label>
+      <input id="supabaseKey" type="password" placeholder="sb_publishable_... ou eyJ..." autocomplete="off">
+      <div class="controles">
+        <button id="btnConectar" type="button">Conectar e carregar jogadores</button>
+        <button id="btnDesconectar" type="button" class="botao-neutro">Desconectar</button>
+      </div>
+      <p id="statusConexao" role="status" aria-live="polite">Ainda não conectado.</p>
+    </div>
+    <p><strong>Segurança:</strong> use somente a chave pública. Nunca coloque a chave <code>service_role</code> ou qualquer segredo no JavaScript do navegador. As políticas RLS da tabela precisam permitir as operações desejadas.</p>
+  </section>
+
+  <section class="crud-layout" aria-labelledby="tituloFormularioSupabase">
+    <form id="formJogadorSupabase" class="crud-form" novalidate>
+      <h3 id="tituloFormularioSupabase">Cadastrar jogador no Supabase</h3>
+      <label for="nomeJogadorSupabase">Nome</label>
+      <input id="nomeJogadorSupabase" name="nome" type="text" minlength="2" maxlength="60" required placeholder="Ex.: Ana Silva">
+      <label for="pontuacaoJogadorSupabase">Pontuação máxima</label>
+      <input id="pontuacaoJogadorSupabase" name="pontuacao" type="number" min="0" max="999999" step="1" value="0" required>
+      <label for="corJogadorSupabase">Cor do personagem</label>
+      <div class="campo-cor"><input id="corJogadorSupabase" name="cor" type="color" value="#22c55e"><output id="valorCorSupabase">#22c55e</output></div>
+      <div class="controles">
+        <button id="btnSalvarSupabase" type="submit">Cadastrar no banco</button>
+        <button id="btnCancelarSupabase" type="button" class="botao-neutro" hidden>Cancelar edição</button>
+      </div>
+      <p id="mensagemCrudSupabase" class="mensagem-crud" role="status" aria-live="polite"></p>
+    </form>
+
+    <section class="lista-jogadores" aria-labelledby="tituloListaSupabase">
+      <div class="lista-cabecalho"><div><h3 id="tituloListaSupabase">Jogadores no PostgreSQL</h3><p>Dados recuperados diretamente da tabela public.jogadores.</p></div><span id="contadorSupabase" class="contador-registros">0 jogadores</span></div>
+      <div class="controles"><button id="btnAtualizarLista" type="button" class="botao-neutro">Atualizar lista</button></div>
+      <div class="tabela-responsiva">
+        <table class="tabela-jogadores">
+          <thead><tr><th>ID</th><th>Jogador</th><th>Pontuação</th><th>Cor</th><th>Ações</th></tr></thead>
+          <tbody id="listaJogadoresSupabase"></tbody>
+        </table>
+      </div>
+      <p id="listaVaziaSupabase" class="lista-vazia">Conecte-se para carregar os registros.</p>
+    </section>
+  </section>
+
+  <section class="bloco-conceito">
+    <h3>O que esta etapa demonstra?</h3>
+    <ul>
+      <li><code>createClient()</code>: cria o cliente de comunicação com Supabase.</li>
+      <li><code>select()</code>: consulta os jogadores cadastrados no PostgreSQL.</li>
+      <li><code>insert()</code>: insere um novo jogador.</li>
+      <li><code>update()</code>: altera os dados de um jogador pelo ID.</li>
+      <li><code>delete()</code>: exclui um jogador pelo ID.</li>
+      <li><code>fetch</code> e HTTP são utilizados internamente pela biblioteca para conversar com a API.</li>
+    </ul>
+    <p>Esta primeira integração mantém o jogo da etapa 12 e o CRUD local da etapa 13 funcionando como antes. A tela 14 é uma experiência separada para estudar o banco remoto; nesta versão, a pontuação do jogo ainda não é enviada automaticamente ao Supabase.</p>
+  </section>
+</main>
+<footer class="rodape"><p><strong>Fábrica Endless Runner</strong> — integração didática com Supabase/PostgreSQL.</p><p><a href="index.html">Voltar ao início</a></p></footer>
+<script src="js/supabase-config.js"></script>
+<script src="js/jogadores-supabase.js"></script>
+</body>
+</html>
