@@ -80,3 +80,12 @@ O script global incluído é o de anúncios automáticos do AdSense. Ele não ga
 
 ### Observação sobre RLS
 A tabela precisa permitir `SELECT`, `INSERT`, `UPDATE` e `DELETE` para o papel usado pela chave pública. Se a consulta retornar erro de permissão, confira as políticas de Row Level Security e os grants no Supabase. Não desative RLS como solução automática.
+
+
+## Etapa 15 — Jogo integrado ao Supabase
+
+Abra `15-jogo-supabase.html`, informe a Project URL e a chave pública (publishable/anon) do projeto e conecte. A página consulta `public.jogadores`, permite selecionar um jogador e utiliza sua cor e recorde. Quando a pontuação da partida supera o recorde carregado, o JavaScript executa um `UPDATE` no registro correspondente.
+
+**Permissões necessárias:** a chave usada no navegador deve ser pública. A tabela precisa permitir `SELECT` para carregar jogadores e `UPDATE` para gravar recordes. Com RLS habilitado, crie políticas adequadas para essas operações. Para o protótipo didático, não use `service_role` no navegador e não deixe operações públicas irrestritas em um projeto de produção.
+
+A etapa 15 não usa `localStorage` para jogadores ou recordes. A pontuação corrente da partida existe apenas na memória; somente o recorde é persistido. As etapas 12 e 13 permanecem como demonstração da versão local, e a etapa 14 continua sendo o CRUD remoto.

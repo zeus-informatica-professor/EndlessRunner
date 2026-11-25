@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jogue Endless Runner usando jogadores e recordes armazenados no Supabase/PostgreSQL.">
+  <title>Etapa 15 — Jogo integrado ao Supabase | Fábrica Endless Runner</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Google AdSense: anúncios automáticos (exibição condicionada à aprovação do site). -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9990121839271094" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="portal-body">
+<header class="portal-header"><div class="marca"><span class="simbolo">🏃</span><div><h1>Fábrica Endless Runner</h1><p class="submarca">Etapa 15 · Jogo conectado ao PostgreSQL</p></div></div>
+<nav class="portal-nav"><a href="index.html">Início</a><a href="12-jogo.html">12. Jogo local</a><a href="13-jogadores.html">13. CRUD local</a><a href="14-supabase.html">14. CRUD Supabase</a><a href="15-jogo-supabase.html">15. Jogo + Supabase</a></nav></header>
+<main>
+  <aside class="anuncio" aria-label="Espaço de publicidade"><strong>Publicidade</strong><small>Espaço reservado para anúncios. A exibição depende da aprovação do site e da configuração da conta do AdSense.</small></aside>
+  <section class="introducao"><h2>Etapa 15 — Jogue com os dados do Supabase</h2>
+  <p>Agora o jogo consulta os jogadores diretamente em <code>public.jogadores</code>. Ao superar o recorde pessoal, a nova pontuação máxima é gravada no PostgreSQL. Esta etapa não utiliza o cadastro do <code>localStorage</code>.</p></section>
+  <section class="bloco-conceito"><h3>1. Conectar ao banco</h3><p>Use a mesma Project URL e a chave pública (publishable/anon) da etapa 14. A chave é mantida apenas nesta página, em memória.</p>
+    <div class="crud-form"><label for="supabaseUrlJogo">Project URL</label><input id="supabaseUrlJogo" type="url" placeholder="https://seu-projeto.supabase.co" autocomplete="url">
+    <label for="supabaseKeyJogo">Publishable key / anon key</label><input id="supabaseKeyJogo" type="password" placeholder="sb_publishable_... ou eyJ..." autocomplete="off">
+    <div class="controles"><button id="btnConectarJogo" type="button">Conectar e carregar jogadores</button><button id="btnDesconectarJogo" type="button" class="botao-neutro">Desconectar</button><button id="btnAtualizarJogadores" type="button" class="botao-neutro">Atualizar jogadores</button></div>
+    <p id="statusConexaoJogo" role="status" aria-live="polite">Ainda não conectado.</p></div>
+    <p><strong>Segurança:</strong> utilize somente a chave pública. Nunca coloque <code>service_role</code> ou qualquer chave secreta no navegador. As permissões/RLS precisam permitir consultar jogadores e atualizar a pontuação.</p>
+  </section>
+  <section class="bloco-conceito seletor-jogador" aria-labelledby="tituloJogadorAtivo"><div><h3 id="tituloJogadorAtivo">2. Escolha quem vai jogar</h3><p>A lista abaixo é carregada do banco remoto.</p></div>
+    <label for="seletorJogadorSupabase">Jogador ativo</label><select id="seletorJogadorSupabase" disabled><option value="">Conecte-se para carregar</option></select>
+    <p id="statusJogadorSupabase" role="status" aria-live="polite">Conecte-se ao Supabase para selecionar um jogador.</p>
+  </section>
+  <section class="cena" id="cenaSupabase" aria-label="Área do jogo Endless Runner"><div class="sol"></div><div class="nuvem" style="left:12%;top:17%"></div><div class="nuvem" style="left:52%;top:30%;transform:scale(.8)"></div><div class="montanha" style="left:8%"></div><div class="montanha" style="right:7%;transform:scale(.8)"></div><div class="personagem" id="personagemSupabase" aria-label="Personagem do jogo"></div><div class="mensagem-jogo" id="mensagemJogoSupabase" role="status" aria-live="polite">CONECTE-SE AO SUPABASE</div><div class="hud"><span id="hudVidasSupabase">❤️❤️❤️ Vidas: 3</span><span id="hudPontosSupabase">⭐ Pontos: 0</span><span id="hudRecordeSupabase">🏆 Recorde: 0</span></div><div class="faixa"></div><div class="chao"></div></section>
+  <p id="statusJogoSupabase" role="status" aria-live="polite">Depois de conectar e selecionar um jogador, clique em Iniciar. Espaço ou ↑ para pular.</p>
+  <div class="controles"><button id="btnIniciarSupabase" type="button" disabled>▶ Iniciar</button><button id="btnPausarSupabase" type="button" disabled>⏸ Pausar</button><button id="btnReiniciarSupabase" type="button" disabled>↻ Reiniciar</button></div>
+  <section class="bloco-conceito"><h3>O que mudou nesta etapa?</h3><ul><li>O seletor de jogadores é preenchido com uma consulta <code>SELECT</code> ao Supabase.</li><li>A cor do personagem e o recorde vêm do registro selecionado no PostgreSQL.</li><li>Quando a pontuação ultrapassa o recorde, o jogo executa um <code>UPDATE</code> na tabela.</li><li>O ranking pode ser conferido na etapa 14, atualizando a lista.</li><li>As etapas 12 e 13 continuam independentes e demonstram a versão com <code>localStorage</code>.</li></ul>
+  <p><strong>Observação:</strong> a pontuação atual da partida é mantida na memória do navegador. O banco recebe somente a melhor pontuação do jogador; se a página for fechada antes de superar o recorde, a partida não será registrada.</p></section>
+  <section class="bloco-conceito"><h3>Desafio de análise</h3><p>Localize no arquivo <code>js/jogo-supabase.js</code> a função que consulta jogadores, a função que atualiza o recorde e o evento que troca o jogador. Explique a diferença entre o estado temporário da partida e os dados persistentes no PostgreSQL.</p></section>
+  <aside class="anuncio" aria-label="Espaço de publicidade"><strong>Publicidade</strong><small>Espaço reservado para anúncios. A exibição depende da aprovação do site e da configuração da conta do AdSense.</small></aside>
+</main>
+<footer class="rodape"><p><strong>Fábrica Endless Runner</strong> — integração didática com Supabase/PostgreSQL.</p><p><a href="14-supabase.html">Gerenciar jogadores no banco</a> · <a href="index.html">Voltar ao início</a></p></footer>
+<script src="js/supabase-config.js"></script><script src="js/jogo-supabase.js"></script>
+</body></html>
